@@ -1,0 +1,31 @@
+S. 1: gitter af cirkler på skærm
+1) skab vindue (baggrund: beige)
+2) funktion til skabning af grid i array med en hvilken som helst størelse
+3) tegn cirkler i vinduet i det oprettede gitter (hvid)
+
+S. 2: slangehovedet med brugerinput
+1) sæt slangehovedets position til midten af gitteret
+2) giv langehovedet farve (grøn)
+3) giv slangen en retning som den bevæger sig hvert tick
+4) lad brugeren styre slangens retning med WASD og piltaster
+5) gør så slangens retning ikke kan ændres med mere end 90 grader ad gangen
+
+S. 3: tilføj spiselig mad ved en tilfældigt position på gitteret
+1) opret madvektor med tilfældige koordinater
+2) lav cirklen i madvektoren rød
+3) hvis madens vektors koordinater er lig med slangens hoved, lav nye tilfældige koordinator til madens vektor
+
+S. 4: tilføj længde på slangen for hver mad det spises, og tjek om slangen rammer sin hale
+1) opret array med positioner til delene af slangens krop
+2) tegn slangens korpsdele ligesom hovedet
+3) når slangens hoved rykkes skal den sidste kropsdel i listen slettes og en ny laves ved sidste position af hovedet
+4) tjek om positionen for slangens hoved står i listen af positioner for slangens kropsdele, og print "game over" hvis den gør
+
+S. 5: tjek om maden der oprettes ligger på slangen, hvis det gør så vælg et nyt sted på gitteret
+1) efter madvektoren genereres tjekkes det om vektoren findes i listen af segmenter af slangen, eller er lig med vektoren for slangens hoved
+2) hvis madvektoren findes i listen, prøv igen
+
+S. 6: lav en buffer der holder et ekstra keyboard input og håndterer det efter det første
+1) lav et array som keyboard inputs bliver indsat i når en tast trykkes
+2) hvert game tick skal det ældste input håndteres og slettes
+3) sæt en max størrelse på array'et på 2 inputs
