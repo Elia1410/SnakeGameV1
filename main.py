@@ -6,13 +6,13 @@ import random
 # variabler til styring af spillet
 screenX, screenY = 650, 650
 r = 18 # radius af cirklerne
-grid_color = (100, 100, 135)
-bg_color = (20, 20, 20)
-player_color = (255, 100, 165)
-segment_color = (255, 60, 125)
-food_color = (0, 175, 155)
-dead_color = (120, 20, 20)
-dead_grid_color = (185, 155, 155)
+grid_color = (230, 230, 230)
+bg_color = (255, 255, 255)
+player_color = (40, 240, 80)
+segment_color = (30, 255, 70)
+food_color = (240, 50, 35)
+dead_color = (30, 185, 70)
+dead_grid_color = (255, 255, 255)
 gridX, gridY = math.floor(screenX/(2*r))-1, math.floor(screenY/(2*r))-1
 player_pos = [math.floor(gridX/2), math.floor(gridY/2)] # [S. 2: (1)]
 player_dir = "L" # L: left, R: right, U: up, D: down
@@ -56,7 +56,7 @@ def draw_segments():
     for i in snake_segments:
         n += 1
         if alive:
-            grid[i[1]][i[0]] = (segment_color[0]-(80/n), segment_color[1]-(35/n), segment_color[2])
+            grid[i[1]][i[0]] = segment_color
         else:
             grid[i[1]][i[0]] = dead_color
 
