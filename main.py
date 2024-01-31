@@ -20,7 +20,7 @@ player_speed = 130_000_000 # delay mellem trin i ns
 food_pos = 0
 points = 0
 snake_segments = [] # liste af arrays [x, y] med slangens segmenter
-keyboard_buffer = "" # [S. 6: (1)]
+keyboard_buffer = "" # [V1 S. 6: (1)]
 alive = True
 
 highscore = 0
@@ -50,7 +50,7 @@ def is_alive():
 def segment_add():
     snake_segments.append([player_pos[0], player_pos[1]])
 
-# gør ciklen i segmenternes position til farven gemt i variablen player_color [S. 3: (2)]
+# gør ciklen i segmenternes position til farven gemt i variablen player_color [V1 S. 3: (2)]
 def draw_segments():
     n = 1
     for i in snake_segments:
@@ -66,20 +66,20 @@ def update_segments():
         snake_segments.pop(0)
         segment_add()
 
-# sæt madens position til et tilfældigt sted på gitteret [S. 3: (1)]
+# sæt madens position til et tilfældigt sted på gitteret [V1 S. 3: (1)]
 def random_food_position():
     global food_pos
-    while food_pos == 0 or (food_pos in snake_segments or  food_pos == player_pos): # [S. 5: (1-2)]
+    while food_pos == 0 or (food_pos in snake_segments or  food_pos == player_pos): # [V1 S. 5: (1-2)]
         food_pos = [random.randint(0, gridX-1), random.randint(0, gridY-1)]
 random_food_position()
 
-# tjek om maden er på slangens hoved -> Bool [S. 3: (3)]
+# tjek om maden er på slangens hoved -> Bool [V1 S. 3: (3)]
 def check_food():
     if food_pos == player_pos:
         return True
     return False
 
-# gør ciklen i madens position til farven gemt i variablen food_color [S. 2: (2)]
+# gør ciklen i madens position til farven gemt i variablen food_color [V1 S. 2: (2)]
 def draw_food():
     grid[food_pos[1]][food_pos[0]] = food_color
 
@@ -91,7 +91,7 @@ clock = pygame.time.Clock()
 running = True
 dt = 0
 
-# gitter setup [S. 1: (2)]
+# gitter setup [V1 S. 1: (2)]
 grid = []
 def grid_make():
     if alive:
@@ -107,7 +107,7 @@ def grid_make():
             grid[i].append(c)
 grid_make()
 
-# funktion til at tegne cirklerne på gitteret [S. 1: (3)]
+# funktion til at tegne cirklerne på gitteret [V1 S. 1: (3)]
 def draw_grid(offsetX, offsetY, spacing, radius):
     spacing += radius*2
     n_y = 0
@@ -124,7 +124,7 @@ def draw_grid(offsetX, offsetY, spacing, radius):
             )
             pygame.draw.circle(surface, color, center, radius)
 
-# gør ciklen i spillerens position til farven gemt i variablen player_color [S. 2: (2)]
+# gør ciklen i spillerens position til farven gemt i variablen player_color [V1 S. 2: (2)]
 def draw_player():
     if alive:
         grid[player_pos[1]][player_pos[0]] = player_color
@@ -135,7 +135,7 @@ ns_last = time.time_ns()
 snake_segments = []
 
 while running:
-    # fang spillerens keyboardinput [S. 2: (4)] & [S. 6: (3)]
+    # fang spillerens keyboardinput [V1 S. 2: (4)] & [S. 6: (3)]
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -151,7 +151,7 @@ while running:
             if event.key == pygame.K_r:
                 alive = False
                 
-    # flyt spillerens position i retningen spilleren har valgt [S. 2: (4)]
+    # flyt spillerens position i retningen spilleren har valgt [V1 S. 2: (4)]
     if time.time_ns() > player_speed + ns_last:
         update_segments()
         if len(keyboard_buffer) > 0:
@@ -168,7 +168,7 @@ while running:
         
         ns_last = time.time_ns()
 
-    # tjek positionen af maden og sæt den til ny position hvis slangens hoved ligger på maden
+    # tjek positionen af maden og sæt den til ny position hvis slangens hoved ligger på maden [V1 S. 3: (3)]
     if check_food():
         points += 1
         random_food_position()
