@@ -3,6 +3,9 @@ import math
 import time
 import random
 
+# load alle sprites fra load_sprites.py
+import load_sprites as spr
+
 # variabler til styring af spillet
 screenX, screenY = 650, 650
 r = 18 # radius af cirklerne
@@ -71,7 +74,7 @@ def random_food_position():
     global food_pos
     while food_pos == 0 or (food_pos in snake_segments or  food_pos == player_pos): # [V1 S. 5: (1-2)]
         food_pos = [random.randint(0, gridX-1), random.randint(0, gridY-1)]
-random_food_position()
+
 
 # tjek om maden er på slangens hoved -> Bool [V1 S. 3: (3)]
 def check_food():
@@ -91,38 +94,21 @@ clock = pygame.time.Clock()
 running = True
 dt = 0
 
-# gitter setup [V1 S. 1: (2)]
+# gitter setup
 grid = []
 def grid_make():
-    if alive:
-        c = grid_color
-    else:
-        c = (0, 0, 0)
-    
     global grid
-    grid = []
-    for i in range(gridY):
-        grid.append([])
-        for u in range(gridX):
-            grid[i].append(c)
+    grid = [[[] for x in range(screenX)] for y in range(screenY)]
 grid_make()
 
-# funktion til at tegne cirklerne på gitteret [V1 S. 1: (3)]
+# funktion til at tegne sprites på gitteret
 def draw_grid(offsetX, offsetY, spacing, radius):
     spacing += radius*2
     n_y = 0
-    for i in grid:
-        n_x = 0
-        n_y += 1
-        for u in i:
-            n_x += 1
-            surface = screen
-            color = u
-            center = (
-                offsetX+n_x*spacing,
-                offsetY+n_y*spacing
-            )
-            pygame.draw.circle(surface, color, center, radius)
+    for y in range(len(grid)):
+        for x in range(len(grid[y])):
+            rect = pygame.Rect((offsetX + x*2*radius, offsetY + y*2*radius))
+            screen.blit(spr.apple, rect)
 
 # gør ciklen i spillerens position til farven gemt i variablen player_color [V1 S. 2: (2)]
 def draw_player():
@@ -133,6 +119,7 @@ def draw_player():
 
 ns_last = time.time_ns()
 snake_segments = []
+random_food_position()
 
 while running:
     # fang spillerens keyboardinput [V1 S. 2: (4)] & [S. 6: (3)]
